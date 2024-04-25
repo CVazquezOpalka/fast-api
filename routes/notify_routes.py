@@ -1,18 +1,18 @@
 from db import get_notificaions, delete_notifications, create_notificaions
-from models import Notification
+from models.model_notify import Notification
 from fastapi import HTTPException, APIRouter
 
 
 notify = APIRouter()
 
 
-@notify.get("/", tags=["Home APi Page"])
+@notify.get("/", tags=["Notificaciones"])
 async def todas_notificaciones():
     response = await get_notificaions()
     return response
 
 
-@notify.post("/", tags=["Home APi Page"])
+@notify.post("/", tags=["Notificaciones"])
 async def create_notify(noti: Notification):
     response = await create_notificaions(noti.model_dump())
     if response:
@@ -20,7 +20,7 @@ async def create_notify(noti: Notification):
     raise HTTPException(400, "Algo Salio mal vuelve a intentar")
 
 
-@notify.delete("/{id}", tags=["Delete"])
+@notify.delete("/{id}", tags=["Notificaciones"])
 async def borrar_notification(id: str):
     response = await delete_notifications(id)
     if response:

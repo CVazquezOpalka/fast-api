@@ -1,5 +1,5 @@
 from motor.motor_asyncio import AsyncIOMotorClient
-from models import Notification, CreateNotification
+from models.model_notify import Notification
 
 
 client = AsyncIOMotorClient(
@@ -10,6 +10,7 @@ database = client.notificationdb
 
 collection = database.notification
 
+#Db Notificaciones
 
 async def get_notificaions():
     notify = []
@@ -27,7 +28,6 @@ async def create_notificaions(notificacion: Notification):
     return created_notification
 
 
-
 async def delete_notifications(custom_id: str):
     # Utiliza el campo "id" en el filtro de eliminación
     result = await collection.delete_one({"id": custom_id})
@@ -36,3 +36,9 @@ async def delete_notifications(custom_id: str):
         return True
     else:
         return False
+
+
+#Db Users
+
+
+    
